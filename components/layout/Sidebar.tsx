@@ -10,6 +10,7 @@ import { signOut } from "next-auth/react";
 
 const Sidebar = () => {
   const { data: currentUser} = useCurrentUser()
+  
   const items = [
     {
       label: "Home",
@@ -17,10 +18,11 @@ const Sidebar = () => {
       icon: BsHouseFill,
     },
     {
-      label: "Notification",
-      href: "/notification",
+      label: "Notifications",
+      href: "/notifications",
       icon: BsBellFill,
-      auth: true
+      auth: true,
+      alert: currentUser?.hasNotifications
     },
     {
       label: "Profile",
@@ -41,6 +43,7 @@ const Sidebar = () => {
               label={item.label}
               icon={item.icon}
               auth={item.auth}
+              alert={item.alert}
             />
           ))}
           {currentUser && (
